@@ -10,7 +10,7 @@ def read(path: str) -> List[Dict]:
         with open(path) as pathFile:
             newJobs = list(csv.DictReader(pathFile))
             pathList = newJobs
-            print(pathList)
+            # print(pathList)
     except FileNotFoundError as err:
         print("Arquivo não encontrado!")
         print(err)
@@ -20,21 +20,14 @@ def read(path: str) -> List[Dict]:
 
 
 def get_unique_job_types(path: str) -> List[str]:
-    """Checks all different job types and returns a list of them
-
-    Must call `read`
-
-    Parameters
-    ----------
-    path : str
-        Must be passed to `read`
-
-    Returns
-    -------
-    list
-        List of unique job types
-    """
-    raise NotImplementedError
+    allJobs = read(path)
+    allUniqueJobs = []
+    for job in allJobs:
+        jobType = job['job_type']
+        if jobType not in allUniqueJobs:
+            allUniqueJobs.append(jobType)
+    print(allUniqueJobs)
+    return allUniqueJobs
 
 
 def filter_by_job_type(jobs: List[Dict], job_type: str) -> List[Dict]:
@@ -56,4 +49,5 @@ def filter_by_job_type(jobs: List[Dict], job_type: str) -> List[Dict]:
 
 
 if __name__ == "__main__":
-    read("data/nomes.csv")
+    myJobs = read("data/jobs.csv")
+    myUnique = get_unique_job_types("data/jobs.csv")
