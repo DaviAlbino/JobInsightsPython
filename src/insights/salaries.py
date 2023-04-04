@@ -52,24 +52,20 @@ def filter_by_salary_range(
     jobs: List[dict],
     salary: Union[str, int]
 ) -> List[Dict]:
-    """Filters a list of jobs by salary range
+    filtered_salaries = []
+    for job in jobs:
+        try:
+            if matches_salary_range(job, salary):
+                filtered_salaries.append(job)
+        except ValueError:
+            pass
+    print(filtered_salaries)
 
-    Parameters
-    ----------
-    jobs : list
-        The jobs to be filtered
-    salary : int
-        The salary to be used as filter
-
-    Returns
-    -------
-    list
-        Jobs whose salary range contains `salary`
-    """
-    raise NotImplementedError
+    return filtered_salaries
 
 
 if __name__ == "__main__":
     myMaxMoney = get_max_salary("data/testSalary.csv")
     myMinMoney = get_min_salary("data/jobs.csv")
-    salaryRange = matches_salary_range(read("data/jobs.csv")[3], 4000)
+    salaryRange = matches_salary_range(read("data/jobs.csv")[4], 11000)
+    filterRange = filter_by_salary_range(read("data/jobs.csv"), 11000)
