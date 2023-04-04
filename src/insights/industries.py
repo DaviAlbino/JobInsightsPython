@@ -1,6 +1,5 @@
 from typing import List, Dict
 from src.insights.jobs import read
-# from src.insights.jobs import myJobs
 
 
 def get_unique_industries(path: str) -> List[str]:
